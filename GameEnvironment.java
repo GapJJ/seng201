@@ -26,24 +26,87 @@ public class GameEnvironment {
         Farm farm = new Farm(playerFarmer, type);
         gameFarm = farm;
     }
+
+
     //main game
     public void mainGame() {
    
         System.out.println("What would you like to do?");
+        System.out.println("Z. Perform an action");
         System.out.println("A. Check on farm");
         System.out.println("B. Check bank balance");
         System.out.println("C. Go to General Store");
-        System.out.println("D. Quit\n");
+        System.out.println("D. End the day");
+        System.out.println("E. Quit\n");
         String option = scan.nextLine();
 
-        if (option.equals("D")) {
+        if (option.equals("E")) {
             this.alive = false;
         } else if (option.equals("B")) {
             checkBalance();
         } else if (option.equals("A")) {
-            checkCrops();
+            checkFarm();
+        } else if (option.equals("Z")) {
+            actions();
         }
         
+    }
+    //Z. Perform an action
+    public void actions() {
+        System.out.println("A. Tend to crops");
+        System.out.println("B. Feed animals");
+        System.out.println("C. Play with animals");
+        System.out.println("D. Tend to the farm land");
+        System.out.println("E. Cancel\n");
+        String option = scan.nextLine();
+
+        if (option.equals("A")) {
+            tendCrops();
+        } else if (option.equals("B")) {
+            System.out.println("A. Corn");
+        } else if (option.equals("C")) {
+            System.out.println("A. Corn");
+        } else if (option.equals("D")) {
+            System.out.println("A. Corn");
+        } else if (option.equals("E")) {
+            System.out.println("A. Corn");
+        }      
+    }
+
+    public void tendCrops() {
+        String selection = "";
+        System.out.println("What crop to tend to");
+        System.out.println("A. Corn");
+        System.out.println("B. Carrot");
+        System.out.println("E. Cancel\n");
+
+        String option = scan.nextLine();
+        if (option.equals("A")) {
+            selection = "Corn";
+        } else if (option.equals("B")) {
+            selection = "Carrot";
+        }
+
+        for (Crop crop : gameFarm.getCrops()) {
+            if (crop.getCropType().equals(selection)) {
+                crop.reduceDTH(1);
+            }
+        }
+
+    }
+
+    //A. Check on farm
+    public void checkFarm() {
+        System.out.println("What would you like to do?");
+        System.out.println("A. Check on crops");
+        System.out.println("B. Check on animals\n");
+        String option = scan.nextLine();
+
+        if (option.equals("A")) {
+            checkCrops();
+        } else if (option.equals("B")) {
+            checkAnimals();
+        }
     }
 
     public void checkCrops() {
@@ -53,15 +116,32 @@ public class GameEnvironment {
             System.out.println(count + ". " + crop);
             count += 1;
         }
+    }
 
+    public void checkAnimals() {
+        int count = 1;
+
+        for (Animal animal : gameFarm.getAnimals()) {
+            System.out.println(count + ". " + animal);
+            count += 1;
+        }
     }
 
 
-    //Money Stuff
+
+    //B. Check bank balance
     public void checkBalance() {
         System.out.println("Your current balance is $" + Integer.toString(gameFarm.getBank()) + "\n");
     }
 
+    //C. Go to General Store
+
+    //D. End the day
+
+    //E. Quit
+    public void nextDay() {
+        System.out.println("Going to bed");
+    }
     public static void main(String[] args) {
         GameEnvironment instance = new GameEnvironment();
         while (instance.alive == true) {

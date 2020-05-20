@@ -1,10 +1,13 @@
-public class Pig {
+public class Pig extends Animal{
 
     public Pig() {
-        pPrice = 10;
-        moneyGained = 5;
-        health = 10;
-        happiness = 8;
+        setAnimalType("Pig");
+        setPPrice(10);
+        setMoneyGained(5);
+        setHealth(10);
+        setHappiness(8);
     }
+
+
     
 }

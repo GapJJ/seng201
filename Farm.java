@@ -20,9 +20,11 @@ public class Farm {
         crops = new ArrayList<Crop>();
         animals = new ArrayList<Animal>();
         bank = 500;
-        Carrot carrot = new Carrot();
+
+        //just for testing
         crops.add(new Carrot());
         crops.add(new Corn());
+        animals.add(new Pig());
     }
 
     public String getName() {
@@ -36,6 +38,10 @@ public class Farm {
 
     public  ArrayList<Crop> getCrops() {
         return crops;
+    }
+
+    public  ArrayList<Animal> getAnimals() {
+        return animals;
     }
 
 }

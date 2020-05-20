@@ -1,9 +1,21 @@
 public class Animal {
 
+    private String animalType;
     private int pPrice;
     private int moneyGained;
     private int health;
     private int happiness;
+
+    public String toString() {
+        return getAnimalType() + ". Happiness Level: " + Integer.toString(getHappiness()) + ". Health Level: " + Integer.toString(getHealth());
+    }
+
+    public void setAnimalType(String a) {
+        animalType = a;
+    }
+    public String getAnimalType() {
+        return animalType;
+    }
 
     public void setPPrice(int p) {
         pPrice = p;
