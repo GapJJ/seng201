@@ -50,7 +50,7 @@ public class GameEnvironment {
         } else if (option.equals("B")) {
             checkBalance();
         } else if (option.equals("C")) {
-            checkBalance();
+            goGeneralStore();
         } else if (option.equals("D")) {
             endDay();
         } else if (option.equals("Z")) {
@@ -68,9 +68,9 @@ public class GameEnvironment {
         String option = scan.nextLine();
 
         if (option.equals("A")) {
-            tendCrops();
+            tendCrop();
         } else if (option.equals("B")) {
-            System.out.println("A. Corn");
+            feedAnimals();
         } else if (option.equals("C")) {
             System.out.println("A. Corn");
         } else if (option.equals("D")) {
@@ -80,7 +80,7 @@ public class GameEnvironment {
         }      
     }
 
-    public void tendCrops() {
+    public void tendCrop() {
         String selection = "";
         System.out.println("What crop to tend to");
         System.out.println("A. Corn");
@@ -99,8 +99,16 @@ public class GameEnvironment {
                 crop.reduceDTH(1);
             }
         }
-
     }
+
+    public void feedAnimals() {
+        gameFarm.feedAllAnimals();     
+    }
+
+    public void playAnimals() {
+        gameFarm.playAllAnimals();
+    } 
+     
 
     //A. Check on farm
     public void checkFarm() {
@@ -142,6 +150,37 @@ public class GameEnvironment {
     }
 
     //C. Go to General Store
+    public void goGeneralStore() {
+
+        System.out.println("What would you like to do?");
+        System.out.println("A. View Inventory");
+        System.out.println("B. View Shop\n");
+        String option = scan.nextLine();
+
+        if (option.equals("A")) {
+            viewInventory();
+        } else if (option.equals("B")) {
+            checkAnimals();
+        }        
+    }
+
+    public void viewInventory() {
+        int count = 1;
+
+        checkBalance();
+        System.out.println("Your items:");
+        for (Item item : gameFarm.getItems()) {
+            System.out.println(count + ". " + item);
+            count += 1;
+        }
+    }
+
+
+    public void viewShop() {
+        System.out.println("uhhhhhhh");
+
+    }
+
 
     //D. End the day
     public void endDay() {
@@ -150,7 +189,6 @@ public class GameEnvironment {
 
         endDayAnimals();
         endDayCrops();
-
 
         if (day == gameLength){
             alive = false;
