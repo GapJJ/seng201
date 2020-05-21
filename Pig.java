@@ -7,7 +7,4 @@ public class Pig extends Animal{
         setHealth(10);
         setHappiness(8);
     }
-
-
-    
 }

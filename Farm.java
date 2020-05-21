@@ -27,9 +27,11 @@ public class Farm {
         crops.add(new Carrot());
         crops.add(new Corn());
         animals.add(new Pig());
-        animals.add(new Pig());
-        animals.add(new Pig());
+        animals.add(new Llama());
+        animals.add(new Sheep());
         items.add(new AnimalToy());
+        items.add(new NutrientWater());
+
     }
 
     public String getName() {
@@ -48,6 +50,25 @@ public class Farm {
     //crops
     public  ArrayList<Crop> getCrops() {
         return crops;
+    }
+
+    public void tendCrop(String selection) {
+        for (Crop crop : crops) {
+            if (crop.getCropType().equals(selection)) {
+                crop.reduceDTH(1);
+            }
+        }
+    }
+
+        //tend crop with item
+    public void tendCrop(String selection, Item item) {
+        if (item.getName().equals("Nutrient Water")) {
+            for (Crop crop : crops) {
+                if (crop.getCropType().equals(selection)) {
+                    crop.reduceDTH(1);
+                }
+            }
+        }        
     }
 
     public  void reduceAllDTH(int days) {
@@ -84,6 +105,11 @@ public class Farm {
                 animal.raiseHappiness();
             }
         }
+    }
+
+    public Item remove(Item item) {
+        System.out.println(items.remove(item));
+        return new NutrientWater();
     }
 
 }

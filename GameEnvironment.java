@@ -94,10 +94,12 @@ public class GameEnvironment {
             selection = "Carrot";
         }
 
-        for (Crop crop : gameFarm.getCrops()) {
-            if (crop.getCropType().equals(selection)) {
-                crop.reduceDTH(1);
-            }
+        String cropAction = cropActionSelector();
+        if (cropAction.equals("Water")){
+            gameFarm.tendCrop(selection);
+        } else if (cropAction.equals("Nutrient Water")){
+            Item item = gameFarm.remove(new NutrientWater());
+            gameFarm.tendCrop(selection, item);
         }
     }
 
@@ -109,6 +111,35 @@ public class GameEnvironment {
         gameFarm.playAllAnimals();
     } 
      
+    public String cropActionSelector() {
+        System.out.println("What would you like to use for your crops?");
+        System.out.println("1. Water");
+        System.out.println("2. Item");
+        System.out.println("3. Cancel\n");
+        String option = scan.nextLine();
+
+        if (option.equals("1")) {
+            return "Water";
+        } else if (option.equals("2")) {
+            return cropItemSelector();
+        } else {
+            return "Water";
+        }
+    }
+
+    public String cropItemSelector() {
+        System.out.println("Which item would you like to use?");
+
+        int count = 1;
+        for (Item item : gameFarm.getItems()) {
+            System.out.println(count + ". " + item.getName());
+            count += 1;
+        }
+        String option = scan.nextLine();
+
+        return "fds";
+    }
+
 
     //A. Check on farm
     public void checkFarm() {
@@ -140,6 +171,7 @@ public class GameEnvironment {
             System.out.println(count + ". " + animal);
             count += 1;
         }
+        System.out.println("\n");
     }
 
 
@@ -217,5 +249,6 @@ public class GameEnvironment {
             instance.mainGame();
 
         }
-	}
+
+    }	
 }
