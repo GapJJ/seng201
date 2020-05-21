@@ -13,11 +13,6 @@ public class Crop {
         daysTillHarvest =  daysTillHarvest - reduce;
     }
 
-    public void tendToCrop() {
-        reduceDTH(1);
-    }
-
-
     public String getCropType() {
         return cropType;
     }

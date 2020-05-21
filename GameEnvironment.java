@@ -7,9 +7,12 @@ public class GameEnvironment {
     //game setup
     public int gameLength;
     public Farm gameFarm;
+    public int day;
+    public int actionsPerDay;
 
     public GameEnvironment() {
         alive = true;
+        day = 0;
         System.out.println("select game length (1~5)");
         String days = scan.nextLine();
         gameLength = Integer.parseInt(days);
@@ -42,10 +45,14 @@ public class GameEnvironment {
 
         if (option.equals("E")) {
             this.alive = false;
-        } else if (option.equals("B")) {
-            checkBalance();
         } else if (option.equals("A")) {
             checkFarm();
+        } else if (option.equals("B")) {
+            checkBalance();
+        } else if (option.equals("C")) {
+            checkBalance();
+        } else if (option.equals("D")) {
+            endDay();
         } else if (option.equals("Z")) {
             actions();
         }
@@ -137,11 +144,35 @@ public class GameEnvironment {
     //C. Go to General Store
 
     //D. End the day
+    public void endDay() {
+        System.out.println("Going to bed\n");
+        day += 1;
+
+        endDayAnimals();
+        endDayCrops();
+
+
+        if (day == gameLength){
+            alive = false;
+        }
+    }
+
+    public void endDayAnimals() {
+        int total = 0;
+        for (Animal animal : gameFarm.getAnimals()) {
+            total += animal.getMoneyGained();
+        }
+        gameFarm.addMoney(total);
+    }
+
+    public void endDayCrops() {
+        gameFarm.reduceAllDTH(1);
+    }
 
     //E. Quit
-    public void nextDay() {
-        System.out.println("Going to bed");
-    }
+
+
+    //Game start
     public static void main(String[] args) {
         GameEnvironment instance = new GameEnvironment();
         while (instance.alive == true) {

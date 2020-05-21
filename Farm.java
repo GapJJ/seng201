@@ -36,10 +36,21 @@ public class Farm {
         return bank;
     }
 
+    public void addMoney(int money) {
+        bank += money;
+    }
+
+    //crops
     public  ArrayList<Crop> getCrops() {
         return crops;
     }
 
+    public  void reduceAllDTH(int days) {
+        for (Crop crop : crops) {
+            crop.reduceDTH(days);
+        }
+    }
+    //animals
     public  ArrayList<Animal> getAnimals() {
         return animals;
     }
