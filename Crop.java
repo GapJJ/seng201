@@ -10,7 +10,7 @@ public class Crop {
     }
 
     public void reduceDTH(int reduce) {
-        daysTillHarvest -= reduce;
+        daysTillHarvest =  daysTillHarvest - reduce;
     }
 
     public void tendToCrop() {
