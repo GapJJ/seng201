@@ -133,7 +133,11 @@ public class GameEnvironment {
         int count = 1;
         for (Item item : gameFarm.getItems()) {
             System.out.println(count + ". " + item.getName());
-            count += 1;
+
+            if (item instanceof CropItem) {
+                System.out.println(count + ". " + item.getName());
+                count += 1;
+            }
         }
         String option = scan.nextLine();
 
@@ -200,6 +204,7 @@ public class GameEnvironment {
         int count = 1;
 
         checkBalance();
+
         System.out.println("Your items:");
         for (Item item : gameFarm.getItems()) {
             System.out.println(count + ". " + item);
