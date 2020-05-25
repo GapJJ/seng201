@@ -23,8 +23,8 @@ public class GameEnvironment {
 
     public void setFarmType(Farmer playerFarmer) {
         System.out.println("Please select a farm type");
-        System.out.println("A - Normal");
-        System.out.println("B - Rich");
+        System.out.println("1 - Normal");
+        System.out.println("2 - Rich");
         String type = scan.nextLine();
         Farm farm = new Farm(playerFarmer, type);
         gameFarm = farm;
@@ -35,47 +35,47 @@ public class GameEnvironment {
     public void mainGame() {
    
         System.out.println("What would you like to do?");
-        System.out.println("Z. Perform an action");
-        System.out.println("A. Check on farm");
-        System.out.println("B. Check bank balance");
-        System.out.println("C. Go to General Store");
-        System.out.println("D. End the day");
-        System.out.println("E. Quit\n");
+        System.out.println("1. Perform an action");
+        System.out.println("2. Check on farm");
+        System.out.println("3. Check bank balance");
+        System.out.println("4. Go to General Store");
+        System.out.println("5. End the day");
+        System.out.println("6. Quit\n");
         String option = scan.nextLine();
 
-        if (option.equals("E")) {
+        if (option.equals("6")) {
             this.alive = false;
-        } else if (option.equals("A")) {
+        } else if (option.equals("2")) {
             checkFarm();
-        } else if (option.equals("B")) {
+        } else if (option.equals("3")) {
             checkBalance();
-        } else if (option.equals("C")) {
+        } else if (option.equals("4")) {
             goGeneralStore();
-        } else if (option.equals("D")) {
+        } else if (option.equals("5")) {
             endDay();
-        } else if (option.equals("Z")) {
+        } else if (option.equals("1")) {
             actions();
         }
         
     }
     //Z. Perform an action
     public void actions() {
-        System.out.println("A. Tend to crops");
-        System.out.println("B. Feed animals");
-        System.out.println("C. Play with animals");
-        System.out.println("D. Tend to the farm land");
-        System.out.println("E. Cancel\n");
+        System.out.println("1. Tend to crops");
+        System.out.println("2. Feed animals");
+        System.out.println("3. Play with animals");
+        System.out.println("4. Tend to the farm land");
+        System.out.println("5. Cancel\n");
         String option = scan.nextLine();
 
-        if (option.equals("A")) {
+        if (option.equals("1")) {
             tendCrop();
-        } else if (option.equals("B")) {
+        } else if (option.equals("2")) {
             feedAnimals();
-        } else if (option.equals("C")) {
+        } else if (option.equals("3")) {
             System.out.println("A. Corn");
-        } else if (option.equals("D")) {
+        } else if (option.equals("4")) {
             System.out.println("A. Corn");
-        } else if (option.equals("E")) {
+        } else if (option.equals("5")) {
             System.out.println("A. Corn");
         }      
     }
@@ -83,14 +83,14 @@ public class GameEnvironment {
     public void tendCrop() {
         String selection = "";
         System.out.println("What crop to tend to");
-        System.out.println("A. Corn");
-        System.out.println("B. Carrot");
+        System.out.println("1. Corn");
+        System.out.println("2. Carrot");
         System.out.println("E. Cancel\n");
 
         String option = scan.nextLine();
-        if (option.equals("A")) {
+        if (option.equals("1")) {
             selection = "Corn";
-        } else if (option.equals("B")) {
+        } else if (option.equals("2")) {
             selection = "Carrot";
         }
 
@@ -127,12 +127,11 @@ public class GameEnvironment {
         }
     }
 
-    public String cropItemSelector() {
+    public Item cropItemSelector() {
         System.out.println("Which item would you like to use?");
 
         int count = 1;
         for (Item item : gameFarm.getItems()) {
-            System.out.println(count + ". " + item.getName());
 
             if (item instanceof CropItem) {
                 System.out.println(count + ". " + item.getName());
@@ -140,21 +139,31 @@ public class GameEnvironment {
             }
         }
         String option = scan.nextLine();
-
-        return "fds";
+        
+        count = 0;
+        for (Item item : gameFarm.getItems()) {
+            if (item instanceof CropItem) {
+                if (Integer.toString(count).equals(option)){
+                    console.log(item.getName());
+                    return item;
+                }
+                count += 1;
+            }
+        }
+        return option;
     }
 
 
     //A. Check on farm
     public void checkFarm() {
         System.out.println("What would you like to do?");
-        System.out.println("A. Check on crops");
-        System.out.println("B. Check on animals\n");
+        System.out.println("1. Check on crops");
+        System.out.println("2. Check on animals\n");
         String option = scan.nextLine();
 
-        if (option.equals("A")) {
+        if (option.equals("1")) {
             checkCrops();
-        } else if (option.equals("B")) {
+        } else if (option.equals("2")) {
             checkAnimals();
         }
     }
@@ -189,13 +198,13 @@ public class GameEnvironment {
     public void goGeneralStore() {
 
         System.out.println("What would you like to do?");
-        System.out.println("A. View Inventory");
-        System.out.println("B. View Shop\n");
+        System.out.println("1. View Inventory");
+        System.out.println("2. View Shop\n");
         String option = scan.nextLine();
 
-        if (option.equals("A")) {
+        if (option.equals("1")) {
             viewInventory();
-        } else if (option.equals("B")) {
+        } else if (option.equals("2")) {
             checkAnimals();
         }        
     }
@@ -252,8 +261,9 @@ public class GameEnvironment {
         GameEnvironment instance = new GameEnvironment();
         while (instance.alive == true) {
             instance.mainGame();
-
         }
+
+        System.out.println("Congratulations on finishing! You managed to earn $" + Integer.toString(instance.gameFarm.getBank()));
 
     }	
 }
