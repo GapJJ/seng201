@@ -127,7 +127,7 @@ public class GameEnvironment {
         }
     }
 
-    public Item cropItemSelector() {
+    public String cropItemSelector() {
         System.out.println("Which item would you like to use?");
 
         int count = 1;
@@ -144,14 +144,14 @@ public class GameEnvironment {
         for (Item item : gameFarm.getItems()) {
             if (item instanceof CropItem) {
                 if (Integer.toString(count).equals(option)){
-                    console.log(item.getName());
-                    return item;
+                    return item.getName();
                 }
                 count += 1;
             }
-        }
-        return option;
+        };
+        return "water";
     }
+    
 
 
     //A. Check on farm
